@@ -18,7 +18,7 @@ namespace Kutuphane
             InitializeComponent();
         }
         OleDbConnection baglanti = new OleDbConnection("Provider=Microsoft.Jet.Oledb.4.0;Data Source=kutuphane.mdb");
-        String kimlik; // seçilen kitabın veritabanı ID si
+        String kim_lik; // seçilen kitabın veritabanı ID si
 
         void kitaplari_goster()
         {
@@ -38,7 +38,7 @@ namespace Kutuphane
         {
             kitaplari_goster();
 
-            panel1.Location = new Point(10,10);
+            panel1.Location = new Point(10, 10);
             panel2.Location = new Point(10, 10);
             panel3.Location = new Point(10, 10);
             panel4.Location = new Point(10, 10);
@@ -46,7 +46,8 @@ namespace Kutuphane
 
         private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            kimlik = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            /*
+            kim_lik = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             String kitapAdi = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             String yazarAdi = dataGridView1.CurrentRow.Cells[2].Value.ToString();
             String yayinEvi = dataGridView1.CurrentRow.Cells[3].Value.ToString();
@@ -78,6 +79,8 @@ namespace Kutuphane
             textBox15.Text = yayinEvi;
             textBox14.Text = sayfaSayisi;
             textBox13.Text = konum;
+             * 
+             * */
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -129,7 +132,7 @@ namespace Kutuphane
         {
             string sorgu = "UPDATE kitaplar SET kitap_adi = '" + textBox10.Text + "',yazar = '" + textBox9.Text 
                 + "',yayin_evi = '" + textBox8.Text + "',sayfa_sayisi = '" + textBox7.Text + "',yer = '" + textBox6.Text
-                + "' WHERE kimlik = " + kimlik;
+                + "' WHERE kimlik = " + kim_lik;
 
             OleDbCommand komut = new OleDbCommand(sorgu, baglanti);
 
@@ -157,6 +160,8 @@ namespace Kutuphane
 
             textBox11.Text = oku.GetValue(1).ToString();
             baglanti.Close();
+
+            button9.Enabled = false;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -192,7 +197,7 @@ namespace Kutuphane
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string sorgu = "DELETE FROM kitaplar WHERE kimlik = " + kimlik;
+            string sorgu = "DELETE FROM kitaplar WHERE kimlik = " + kim_lik;
 
             OleDbCommand komut = new OleDbCommand(sorgu, baglanti);
 
@@ -213,6 +218,14 @@ namespace Kutuphane
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            groupBox1.Visible = !groupBox1.Visible;
+
+
+                
         }
     }
 }

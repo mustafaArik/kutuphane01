@@ -18,6 +18,7 @@ namespace Kutuphane
             InitializeComponent();
         }
         OleDbConnection baglanti = new OleDbConnection("Provider=Microsoft.Jet.Oledb.4.0;Data Source=kutuphane.mdb");
+
         private void button1_Click(object sender, EventArgs e)
         {
             string sql = "SELECT * FROM kullanicilar WHERE kimlik = 1";
@@ -35,6 +36,17 @@ namespace Kutuphane
             }
             
             baglanti.Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+                textBox2.UseSystemPasswordChar = !checkBox1.Checked;
+            
+        }
+
+        private void panel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            textBox2.Focus();
         }
     }
 }
